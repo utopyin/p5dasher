@@ -1,5 +1,3 @@
-let width = 600;
-let height = 600;
 const platformWidth = 80;
 
 function Platform() {
@@ -8,25 +6,30 @@ function Platform() {
   this.velocity = 0;
 
   this.move = function() {
-    if (this.velocity && this.x >= width - platformWidth)  {
-      this.velocity = -1;
-    } else if (this.velocity && this.x <= 0) {
-      this.velocity = 1;
+    if (this.x > width - platformWidth || this.x < 0)  {
+      this.velocity *= -1;
     }
-    this.x = constrain(this.x + this.velocity*10, 0, width - this.width);
+    this.x += this.velocity * game.score.getPlatformSpeed();
   }
 
-  this.update = function() {
+  this.spawn = function() {
+    this.x = 600 / 2 - this.width / 2;
+    this.velocity = 0;
+    rect(this.x, height-150, this.width, 10);
+  }
+
+  this.render = function(isPlaying) {
+    if (!isPlaying) return this.spawn();
     rect(this.x, height-150, this.width, 10);
     this.move();
   }
 
   this.moveRight = function() {
-    this.velocity = 1;
+    if (this.x > 0) this.velocity = 1;
   }
 
   this.moveLeft = function() {
-    this.velocity = -1;
+    if (this.x < width - platformWidth) this.velocity = -1;
   }
 
   this.stop = function() {

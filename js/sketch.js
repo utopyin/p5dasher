@@ -2,19 +2,28 @@ let game;
 
 function setup() {
   createCanvas(600, 600).parent('game');
+  stroke("white");
+  strokeWeight(0);
   game = new Game();
+  game.score.displayHighestScore();
+}
+
+function mousePressed(e) {
+  if (e.button == 0 && !game.isPlaying) {
+    game.start();
+  }
 }
 
 function keyPressed() {
   switch (keyCode) {
     case 68:
-      game.platform.moveRight();
+      if (game.isPlaying) game.platform.moveRight();
       break;
     case 81:
-      game.platform.moveLeft();
+      if (game.isPlaying) game.platform.moveLeft();
       break;
     case 27:
-      game.stop();
+      if (game.isPlaying) game.stop();
       break;
   }
 }

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Montserrat, Sans-serif;
 }
 
 #game {
@@ -11,8 +12,17 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  flex-direction: column;
 }
 
 #game canvas {
   border-radius: 5px;
+}
+
+#scores {
+  display: flex;
+  width: 600px;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
 }
