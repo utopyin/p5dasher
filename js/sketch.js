@@ -1,8 +1,14 @@
 let game;
+let ballSprite;
+const DEFAULT_FRAME_RATE = 60
+
+function preload() {
+  ballSprite = new Sprite('ball', {x: 15, y: 15}, 10);
+}
 
 function setup() {
+  frameRate(DEFAULT_FRAME_RATE);
   createCanvas(600, 600).parent('game');
-  stroke("white");
   strokeWeight(0);
   game = new Game();
   game.score.displayHighestScore();

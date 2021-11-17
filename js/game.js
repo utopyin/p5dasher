@@ -1,3 +1,4 @@
+const DEFAULT_SCORE = 0;
 function Game() {
   this.platform = new Platform();
   this.ball = new Ball();
@@ -24,7 +25,7 @@ function Game() {
 }
 
 class Score {
-  value = 0;
+  value = DEFAULT_SCORE;
 
   add(amount) {
     this.value += amount;
@@ -34,10 +35,10 @@ class Score {
   reset() {
     const highestScore = localStorage.getItem('@highest');
     if (this.value > highestScore) localStorage.setItem('@highest', this.value);
-    this.value = 0;
-    this.display(0);
+    this.value = DEFAULT_SCORE;
+    this.display(DEFAULT_SCORE);
     this.displayHighestScore();
-    return 0;
+    return DEFAULT_SCORE;
   }
 
   display(score) {

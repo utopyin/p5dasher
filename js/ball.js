@@ -1,16 +1,15 @@
 function Ball() {
   this.size = 15;
-  this.position = new createVector(width/2, height/2-150);
+  this.position = new createVector(width / 2 - this.size / 2, height / 2 - 150 - this.size / 2);
   this.velocity = new createVector(0, 0);
 
   this.spawn = function() {
-    this.position = new createVector(width/2, height/2-150);
-    ellipse(this.position.x, this.position.y, this.size);
+    this.position = new createVector(width / 2 - this.size / 2, height / 2 - 150 - this.size / 2);
+    ballSprite.render(this.position.x, this.position.y);
     aim();
   }
 
   this.throw = function(x, y) {
-    console.log(game.score.getBallSpeed())
     this.velocity = createVector(x-(width/2), y-(height/2-150)).normalize().mult(game.score.getBallSpeed());
     this.render();
   }
@@ -26,31 +25,31 @@ function Ball() {
       return;
     }
 
-    if ((this.position.x > width) || (this.position.x < 0)) {
+    if ((this.position.x + this.size >= width) || (this.position.x <= 0)) {
       this.velocity.x = this.velocity.x * -1;
     }
-    if ((this.position.y > height) || (this.position.y < 0)) {
+    if ((this.position.y +this.size >= height) || (this.position.y <= 0)) {
       this.velocity.y = this.velocity.y * -1;
     }
   }
 
   this.isBouncing = function() {
     return (
-      this.position.y + 5 > height - 150 &&
-      this.position.y + 5 < height - 142 &&
-      this.position.x + 10 >= game.platform.x && 
-      this.position.x - 10 <= game.platform.x + platformWidth
+      this.position.y + this.size >= height - 150 &&
+      this.position.y + this.size <= height - 142 &&
+      this.position.x + this.size >= game.platform.x && 
+      this.position.x <= game.platform.x + platformWidth
     )
   }
 
   this.render = function(isPlaying) {
     if (!isPlaying) return this.spawn();
+    ballSprite.render(this.position.x, this.position.y);
     this.move();
-    ellipse(this.position.x, this.position.y, 15);
   }
 
   this.isInRedZone = function() {
-    if (this.position.y > height-150 && (this.position.x <= 0 || this.position.x >= width || this.position.y >= height)) {
+    if (this.position.y + this.size >= height - 142 && (this.position.x <= 0 || this.position.x + this.size >= width || this.position.y + this.size >= height)) {
       return true
     };
   }
@@ -58,6 +57,7 @@ function Ball() {
 
 function aim() {
   strokeWeight(1);
+  stroke('white');
   drawingContext.setLineDash([5, 5]);
   line(width/2, height/2-150, mouseX, mouseY);
   strokeWeight(0);
