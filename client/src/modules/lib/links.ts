@@ -1,0 +1,1 @@
+export const wss = import.meta.env.PROD ? '' : `ws://localhost:${import.meta.env.VITE_PORT}`;

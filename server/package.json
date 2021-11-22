@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "watch": "concurrently --kill-others \"tsc -w\" \"nodemon dist/server.js\""
+  },
+  "author": "utopy",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/ws": "^8.2.0",
+    "concurrently": "^6.4.0",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^8.2.3",
+    "ws-heartbeat": "^1.2.0"
+  }
+}

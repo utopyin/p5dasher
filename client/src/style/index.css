@@ -15,7 +15,30 @@
   flex-direction: column;
 }
 
+@keyframes slide-in {
+  0% {
+    transform: translateX(5%);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 #game canvas {
+  animation: slide-in 0.5s forwards ease-out;
   border-radius: 5px;
 }
 
@@ -25,4 +48,6 @@
   justify-content: space-between;
   margin-bottom: 5px;
   align-items: center;
+  opacity: 0;
+  animation: slide-up 0.2s ease-out forwards 0.3s;
 }
